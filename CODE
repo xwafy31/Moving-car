@@ -1,0 +1,286 @@
+from OpenGL.GL import *
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
+
+
+
+
+def myInit():
+
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    gluPerspective(70, 1, 1, 30)
+    gluLookAt(8, 9, 10,
+              0, 0, 0,
+              0, 1, 0)
+
+    glClearColor(0.2,0.5,0,0)
+
+
+angle = 0
+x = 0
+forward = True
+
+def draw_sky():
+    glColor3f(0,0.4,0.8)
+    glBegin(GL_POLYGON)
+    glVertex(10 ,10,0)
+    glVertex(10 ,5.5,0)
+    glVertex(-25,5.5,0)
+    glVertex(-20,10,0)
+    glEnd()
+
+
+
+
+
+
+def draw():
+    global angle
+    global x
+    global forward
+
+
+
+
+
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
+    glClear(GL_COLOR_BUFFER_BIT)
+    draw_sky()
+
+
+
+
+
+    glColor3f(.6,.6,.6)
+    glBegin(GL_POLYGON)
+    glVertex3f(30,1,0)
+    glVertex3f(-30,2,0)
+    glVertex3f(-30, 0, 4)
+    glVertex3f(30, 0, 3)
+    glEnd()
+
+    glColor3f(0, 0, 0)
+    glLineWidth(2)
+    glBegin(GL_LINES)
+    glVertex3f(30, 1, 0)
+    glVertex3f(-30, 2, 0)
+    glVertex3f(-30, 0, 4)
+    glVertex3f(30, 0, 3)
+    glEnd()
+
+    #LINES
+    glColor3f(1,1,1)
+    glBegin(GL_POLYGON)
+    glVertex3f(8, 0, 0.4)
+    glVertex3f(5, 0, 0.4)
+    glVertex3f(5, 0, 1)
+    glVertex3f(8, 0, 1)
+    glEnd()
+    glColor3f(1, 1, 1)
+    glBegin(GL_POLYGON)
+    glVertex3f(4, 0, 0.4)
+    glVertex3f(1, 0, 0.4)
+    glVertex3f(1, 0, 1)
+    glVertex3f(4, 0, 1)
+    glEnd()
+    glColor3f(1, 1, 1)
+    glBegin(GL_POLYGON)
+    glVertex3f(0, 0, 0.4)
+    glVertex3f(-4, 0, 0.4)
+    glVertex3f(-4, 0, 1)
+    glVertex3f(0, 0, 1)
+    glEnd()
+    glColor3f(1, 1, 1)
+    glBegin(GL_POLYGON)
+    glVertex3f(-6, 0, 0.4)
+    glVertex3f(-10, 0, 0.4)
+    glVertex3f(-10, 0, 1)
+    glVertex3f(-6, 0, 1)
+    glEnd()
+    glColor3f(1, 1, 1)
+    glBegin(GL_POLYGON)
+    glVertex3f(-13, 0, 0.4)
+    glVertex3f(-18, 0, 0.4)
+    glVertex3f(-18, 0, 1)
+    glVertex3f(-13, 0, 1)
+    glEnd()
+
+
+
+
+
+
+
+
+    # draw_XYZ()
+
+
+    glColor3f(1, 0, 0)
+    glTranslate(x, 0, 0)
+    glScale(1, 0.25, 0.5)
+    glColor3f(0,0,.4)
+    glutSolidCube(5)
+
+    glLoadIdentity()
+    glTranslate(x, 5*0.25, 0)
+    glScale(.6, 0.20, 0.5)
+    glColor3f(0,0,.4)
+    glutSolidCube(5)
+
+
+
+    glLoadIdentity()
+    glTranslate(x+1.45, 5 * 0.25, 0)
+    glScale(.01, 0.20, 0.5)
+    glColor3f(0,0.7,1)
+    glutSolidCube(5)
+
+    glColor3f(0, 0, 1)
+    glLoadIdentity()
+    glTranslate(x+0.5*5, -0.5 * 0.25*5, 0.5 * 0.5*5)
+    glRotate(angle, 0, 0, 1)
+    glutWireTorus(0.125, 0.5, 10, 10)
+
+    glLoadIdentity()
+    glTranslate(x+0.5*5, -0.5 * 0.25*5, - 0.5 * 0.5*5)
+    glRotate(angle, 0, 0, 1)
+    glutWireTorus(0.125, 0.5, 10, 10)
+
+    glLoadIdentity()
+    glTranslate(x-0.5*5, -0.5 * 0.25*5, -0.5 * 0.5*5)
+    glRotate(angle, 0, 0, 1)
+    glutWireTorus(0.125, 0.5, 10, 10)
+
+    glLoadIdentity()
+    glTranslate(x-0.5*5, -0.5 * 0.25*5, 0.5 * 0.5*5)
+    glRotate(angle, 0, 0, 1)
+    glutWireTorus(0.125, 0.5, 10, 10)
+
+    #Tree
+    #1
+    glLoadIdentity()
+    glColor3f(0.6, 0.3, 0)
+    glTranslate(2,0,-8)
+    glScale(0.08,0.7,0.08)
+    glutSolidCube(5)
+    glLoadIdentity()
+    glColor3f(0.2,0.8,0.1)
+    glTranslate(2, 2.2, -8)
+    glutSolidSphere(1.5, 10, 10)
+    #2
+    glLoadIdentity()
+    glColor3f(0.6, 0.3, 0)
+    glTranslate(-7, 0, -8)
+    glScale(0.08, 0.7, 0.08)
+    glutSolidCube(5)
+    glLoadIdentity()
+    glColor3f(0.2,0.8,0.1)
+    glTranslate(-7, 2.2, -8)
+    glutSolidSphere(1.5, 10, 10)
+    #3
+    glLoadIdentity()
+    glColor3f(0.6, 0.3, 0)
+    glTranslate(-15, 0, -8)
+    glScale(0.08, 0.7, 0.08)
+    glutSolidCube(5)
+    glLoadIdentity()
+    glColor3f(0.2,0.8,0.1)
+    glTranslate(-15, 2.2, -8)
+    glutSolidSphere(1.5, 10, 10)
+    #4
+    glLoadIdentity()
+    glColor3f(0.6, 0.3, 0)
+    glTranslate(5, 0, 6)
+    glScale(0.08, 0.7, 0.08)
+    glutSolidCube(5)
+    glLoadIdentity()
+    glColor3f(0.2,0.8,0.1)
+    glTranslate(5, 2.2, 6)
+    glutSolidSphere(1, 5, 5)
+    #5
+    glLoadIdentity()
+    glColor3f(0.6, 0.3, 0)
+    glTranslate(0, 0, 6)
+    glScale(0.08, 0.7, 0.08)
+    glutSolidCube(5)
+    glLoadIdentity()
+    glColor3f(0.2,0.8,0.1)
+    glTranslate(0, 2.2, 6)
+    glutSolidSphere(1, 5, 5)
+    #6
+    glLoadIdentity()
+    glColor3f(0.6, 0.3, 0)
+    glTranslate(-6, 0, 6)
+    glScale(0.08, 0.7, 0.08)
+    glutSolidCube(5)
+    glLoadIdentity()
+    glColor3f(0.2, 0.8, 0.1)
+    glTranslate(-6, 2.2, 6)
+    glutSolidSphere(1, 5, 5)
+
+
+    #SUN
+    glLoadIdentity()
+    glTranslate(-4,8,2)
+    glColor3f(0.9,.5,.1)
+    glutSolidSphere(0.5,11,11)
+
+    # سحاب
+    glLoadIdentity()
+    glTranslate(1,8, 2)
+    glColor3f(1,1,1)
+    glutSolidSphere(0.7, 11, 11)
+    glLoadIdentity()
+    glTranslate(.2, 8, 2)
+    glColor3f(1, 1, 1)
+    glutSolidSphere(0.5, 11, 11)
+    glLoadIdentity()
+    glTranslate(1.6, 8, 2)
+    glColor3f(1, 1, 1)
+    glutSolidSphere(0.5, 11, 11)
+
+    #سحاب 2
+
+    glLoadIdentity()
+    glTranslate(5.4, 8, 2)
+    glColor3f(1, 1, 1)
+    glutSolidSphere(0.5, 11, 11)
+    glLoadIdentity()
+    glTranslate(4.9, 8, 2)
+    glColor3f(1, 1, 1)
+    glutSolidSphere(0.3, 11, 11)
+    glLoadIdentity()
+    glTranslate(5.9, 8, 2)
+    glColor3f(1, 1, 1)
+    glutSolidSphere(0.3, 11, 11)
+
+    glutSwapBuffers()
+
+
+
+
+
+
+
+    if forward:
+        angle -= 0.3
+        x += 0.006
+        if x > 8:
+            forward = False
+    else:
+        angle += 0.1
+        x -= 0.006
+        if x < -8:
+            forward = True
+
+
+glutInit()
+glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
+glutInitWindowSize(600, 600)
+glutCreateWindow(b"Moving Car")
+myInit()
+glutDisplayFunc(draw)
+glutIdleFunc(draw)
+glutMainLoop()
